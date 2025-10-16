@@ -3,16 +3,21 @@ import uuid
 
 app = Flask(__name__)
 
+
 # Store tasks in memory (list of dictionaries)
-# Each task has an ID and a description
+# Each task has an ID, description, and completed status
 tasks = []
+
 
 @app.route('/')
 def index():
     """
-    Display the main page with all tasks
+    Display the main page with all tasks and counters
     """
-    return render_template('index.html', tasks=tasks)
+    total_tasks = len(tasks)
+    completed_tasks = sum(1 for t in tasks if t.get('completed'))
+    return render_template('index.html', tasks=tasks, total_tasks=total_tasks, completed_tasks=completed_tasks)
+
 
 @app.route('/add', methods=['POST'])
 def add_task():
@@ -20,17 +25,17 @@ def add_task():
     Add a new task to the list
     """
     task_description = request.form.get('task', '').strip()
-    
     # Validate input
     if task_description:
-        # Create new task with unique ID
+        # Create new task with unique ID and completed status
         new_task = {
             'id': str(uuid.uuid4()),
-            'description': task_description
+            'description': task_description,
+            'completed': False
         }
         tasks.append(new_task)
-    
     return redirect(url_for('index'))
+
 
 @app.route('/delete/<task_id>', methods=['POST'])
 def delete_task(task_id):
@@ -38,9 +43,17 @@ def delete_task(task_id):
     Delete a task by its unique ID
     """
     global tasks
-    # Filter out the task with matching ID
     tasks = [task for task in tasks if task['id'] != task_id]
-    
+    return redirect(url_for('index'))
+@app.route('/toggle/<task_id>', methods=['POST'])
+def toggle_task(task_id):
+    """
+    Toggle the completed status of a task
+    """
+    for task in tasks:
+        if task['id'] == task_id:
+            task['completed'] = not task.get('completed', False)
+            break
     return redirect(url_for('index'))
 
 @app.route('/clear', methods=['POST'])

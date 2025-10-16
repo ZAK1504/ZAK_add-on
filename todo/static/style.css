@@ -12,7 +12,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6347 100%);
     background-attachment: fixed;
     min-height: 100vh;
     display: flex;
@@ -109,7 +109,7 @@ input[type="text"]::placeholder {
 /* Button Styles */
 .btn-add {
     padding: 15px 30px;
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6347 100%);
     color: white;
     border: none;
     border-radius: 10px;
@@ -117,13 +117,13 @@ input[type="text"]::placeholder {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
     white-space: nowrap;
 }
 
 .btn-add:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
 }
 
 .btn-add:active {
@@ -194,6 +194,20 @@ input[type="text"]::placeholder {
 }
 
 /* Task Item */
+/* Checkbox Styling */
+.checkbox-form {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: #ff8c00;
+    cursor: pointer;
+    margin-right: 0;
+}
+
 .task-item {
     display: flex;
     justify-content: space-between;
@@ -202,9 +216,19 @@ input[type="text"]::placeholder {
     margin-bottom: 10px;
     background: #f8f9fa;
     border-radius: 10px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #ff8c00;
     transition: all 0.3s ease;
     animation: fadeIn 0.3s ease-out;
+}
+
+.task-item.completed {
+    background: #ffe0b2;
+    border-left: 4px solid #ff6347;
+}
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #ff6347;
+    opacity: 0.7;
 }
 
 @keyframes fadeIn {
@@ -236,7 +260,7 @@ input[type="text"]::placeholder {
     justify-content: center;
     min-width: 30px;
     height: 30px;
-    background: #667eea;
+    background: #ff8c00;
     color: white;
     border-radius: 50%;
     font-weight: bold;
@@ -251,7 +275,7 @@ input[type="text"]::placeholder {
 
 .btn-delete {
     padding: 8px 12px;
-    background: #ef4444;
+    background: #ff6347;
     color: white;
     border: none;
     border-radius: 8px;
@@ -267,12 +291,26 @@ input[type="text"]::placeholder {
 }
 
 .btn-delete:hover {
-    background: #dc2626;
+    background: #ff8c00;
     transform: scale(1.1);
 }
 
 .btn-delete:active {
     transform: scale(0.95);
+}
+/* Counter Styling */
+.task-counters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+.counter-total {
+    color: #ff8c00;
+    font-weight: bold;
+}
+.counter-completed {
+    color: #ff6347;
+    font-weight: bold;
 }
 
 /* Empty State */

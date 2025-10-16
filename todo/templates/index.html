@@ -28,8 +28,13 @@
             
             <!-- Task List -->
             <div class="task-section">
+
                 <div class="task-header">
-                    <h2>Your Tasks ({{ tasks|length }})</h2>
+                    <h2>Your Tasks ({{ total_tasks }})</h2>
+                    <div class="task-counters">
+                        <span class="counter-total">Total: {{ total_tasks }}</span>
+                        <span class="counter-completed">Completed: {{ completed_tasks }}</span>
+                    </div>
                     {% if tasks %}
                     <form method="POST" action="/clear" style="display: inline;">
                         <button type="submit" class="btn-clear" onclick="return confirm('Are you sure you want to clear all tasks?')">
@@ -42,7 +47,10 @@
                 {% if tasks %}
                 <ul class="task-list">
                     {% for task in tasks %}
-                    <li class="task-item">
+                    <li class="task-item {% if task.completed %}completed{% endif %}">
+                        <form method="POST" action="/toggle/{{ task.id }}" class="checkbox-form">
+                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %}>
+                        </form>
                         <div class="task-content">
                             <span class="task-number">{{ loop.index }}</span>
                             <span class="task-text">{{ task.description }}</span>
@@ -57,17 +65,13 @@
                 </ul>
                 {% else %}
                 <div class="empty-state">
-                    <div class="empty-icon">📋</div>
-                    <p>No tasks yet!</p>
-                    <p class="empty-subtitle">Add your first task to get started</p>
+                        <div class="empty-icon">📋</div>
+                        <p>No tasks yet!</p>
+                        <p class="empty-subtitle">Add your first task to get started</p>
                 </div>
                 {% endif %}
             </div>
         </div>
-        
-        <footer>
-            <p>Built with Flask | Stay Productive 🚀</p>
-        </footer>
     </div>
 </body>
 </html>
