@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="logo">ZAK</div>
+    <div class="container">
+        <div class="card">
+            <h1>BMI Calculator</h1>
+            <p class="subtitle">Calculate your Body Mass Index</p>
+            
+            <form method="POST" action="/">
+                <div class="form-group">
+                    <label for="height">Height (cm)</label>
+                    <input 
+                        type="number" 
+                        id="height" 
+                        name="height" 
+                        placeholder="e.g., 170" 
+                        step="0.1"
+                        value="{{ height_input }}"
+                        required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input 
+                        type="number" 
+                        id="weight" 
+                        name="weight" 
+                        placeholder="e.g., 65" 
+                        step="0.1"
+                        value="{{ weight_input }}"
+                        required>
+                </div>
+                
+                <button type="submit" class="btn-calculate">Calculate BMI</button>
+            </form>
+            
+            {% if error %}
+            <div class="result error">
+                <p class="error-message">{{ error }}</p>
+            </div>
+            {% endif %}
+            
+            {% if bmi and category %}
+            <div class="result">
+                <h2>Your Results</h2>
+                <div class="bmi-value">
+                    <p>Your BMI is</p>
+                    <span class="bmi-number">{{ bmi }}</span>
+                </div>
+                <div class="category {{ category.lower() }}">
+                    <p>Category: <strong>{{ category }}</strong></p>
+                </div>
+                
+                <div class="bmi-info">
+                    <h3>BMI Categories:</h3>
+                    <ul>
+                        <li><span class="underweight">●</span> Underweight: BMI &lt; 18.5</li>
+                        <li><span class="normal">●</span> Normal: BMI 18.5 - 24.9</li>
+                        <li><span class="overweight">●</span> Overweight: BMI 25 - 29.9</li>
+                        <li><span class="obese">●</span> Obese: BMI ≥ 30</li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <footer>
+            <p>BMI Formula: weight (kg) / (height (m))²</p>
+        </footer>
+    </div>
+</body>
+</html>

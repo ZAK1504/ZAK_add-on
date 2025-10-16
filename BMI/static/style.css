@@ -1,0 +1,295 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    overscroll-behavior: none;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6347 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overscroll-behavior: none;
+    overflow-x: hidden;
+}
+
+/* Logo Styling */
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    letter-spacing: 2px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+}
+
+input[type="number"]::placeholder {
+    color: #aaa;
+}
+
+/* Button Styling */
+.btn-calculate {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6347 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+}
+
+.btn-calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+}
+
+.btn-calculate:active {
+    transform: translateY(0);
+}
+
+/* Result Section */
+.result {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.result h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.bmi-value {
+    margin-bottom: 20px;
+}
+
+.bmi-value p {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.bmi-number {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff8c00;
+    display: block;
+}
+
+/* Category Styling with Colors */
+.category {
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
+.category.underweight {
+    background: #e3f2fd;
+    color: #1976d2;
+    border-left: 5px solid #1976d2;
+}
+
+.category.normal {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 5px solid #2e7d32;
+}
+
+.category.overweight {
+    background: #fff3e0;
+    color: #f57c00;
+    border-left: 5px solid #f57c00;
+}
+
+.category.obese {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 5px solid #c62828;
+}
+
+/* BMI Info */
+.bmi-info {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.bmi-info h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.bmi-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.bmi-info li {
+    padding: 8px 0;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.bmi-info .underweight {
+    color: #1976d2;
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+.bmi-info .normal {
+    color: #2e7d32;
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+.bmi-info .overweight {
+    color: #f57c00;
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+.bmi-info .obese {
+    color: #c62828;
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+/* Error Styling */
+.result.error {
+    background: #ffebee;
+    border-left: 5px solid #c62828;
+}
+
+.error-message {
+    color: #c62828;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .card {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .bmi-number {
+        font-size: 2.5em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+}
