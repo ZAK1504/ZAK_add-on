@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="logo">ZAK</div>
+    <div class="container">
+        <div class="card">
+            <h1>📝 To-Do List App</h1>
+            <p class="subtitle">Stay organized and productive</p>
+            
+            <!-- Add Task Form -->
+            <form method="POST" action="/add" class="add-form">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        name="task" 
+                        placeholder="Enter a new task..." 
+                        required
+                        autofocus>
+                    <button type="submit" class="btn-add">Add Task</button>
+                </div>
+            </form>
+            
+            <!-- Task List -->
+            <div class="task-section">
+                <div class="task-header">
+                    <h2>Your Tasks ({{ tasks|length }})</h2>
+                    {% if tasks %}
+                    <form method="POST" action="/clear" style="display: inline;">
+                        <button type="submit" class="btn-clear" onclick="return confirm('Are you sure you want to clear all tasks?')">
+                            Clear All
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+                
+                {% if tasks %}
+                <ul class="task-list">
+                    {% for task in tasks %}
+                    <li class="task-item">
+                        <div class="task-content">
+                            <span class="task-number">{{ loop.index }}</span>
+                            <span class="task-text">{{ task.description }}</span>
+                        </div>
+                        <form method="POST" action="/delete/{{ task.id }}" style="display: inline;">
+                            <button type="submit" class="btn-delete" title="Delete task">
+                                ✕
+                            </button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">📋</div>
+                    <p>No tasks yet!</p>
+                    <p class="empty-subtitle">Add your first task to get started</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <footer>
+            <p>Built with Flask | Stay Productive 🚀</p>
+        </footer>
+    </div>
+</body>
+</html>
